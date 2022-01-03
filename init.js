@@ -1,22 +1,45 @@
-let container = document.getElementById("container");
-let btn = document.createElement("button");
-btn.id = "btn";
-btn.innerHTML = "click me"
-container.append(btn);
+let box = document.getElementById("box");
+let enterText = document.getElementById("enterText");
+let listUl = document.createElement("ul");
+listUl.id = "listUl";
+box.appendChild(listUl);
 
-let box = document.createElement("div");
-box.id = "box";
-container.append(box);
+enterText.value = "";
 
-let itemUl = document.createElement("ul");
-itemUl.id = "itemUl";
-box.appendChild(itemUl);
+btn.addEventListener("click", handleOnClick);
+function handleOnClick() {
+    if (enterText.value == "") {
+        alert("type something")
+    }
+    else {
+        let listLi = document.createElement("li");
+        listLi.innerText = enterText.value;
+        listUl.appendChild(listLi);
 
-let itemNumber=0;
-btn.addEventListener("click",handleOnClick);
-function handleOnClick(){
-    itemNumber++;
-    let itemLi = document.createElement("li");
-    itemUl.appendChild(itemLi);
-    itemLi.innerText = `item ${itemNumber}`;
+        let crossBtn = document.createElement("div");
+        crossBtn.id = "crossBtn";
+        crossBtn.innerText = "X";
+        listUl.appendChild(crossBtn);
+
+        function handleOnCross(){
+            listLi.remove();
+            crossBtn.remove();
+        }
+        crossBtn.addEventListener("click", handleOnCross);
+
+    }
 }
+console.log(listUl);
+
+let clearBtn = document.getElementById("clearBtn");
+function handleClearBtn() {
+    listUl.innerText = "";
+}
+clearBtn.addEventListener("click", handleClearBtn);
+
+function enterTextClr() {
+    enterText.value = "";
+}
+enterText.addEventListener("click", enterTextClr);
+
+console.log(box.innerHTML);
